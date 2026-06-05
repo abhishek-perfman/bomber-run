@@ -28,6 +28,8 @@ jobs:
     # Only run build and deploy when pushing changes directly to the main or master branch
     if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master') && github.event_name == 'push'
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
