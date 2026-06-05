@@ -1,0 +1,78 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  lint-and-style:
+    name: 🎨 Lint and Style Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Verify C# Formatting (dotnet format)
+        run: dotnet format --verify-no-changes
+
+  build-and-deploy:
+    name: 🎮 Build & Deploy (WebGL + Android)
+    needs: lint-and-style
+    # Only run build and deploy when pushing changes directly to the main branch
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Cache Library folder
+        uses: actions/cache@v4
+        with:
+          path: Library
+          key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+          restore-keys: |
+            Library-
+
+      # 1. Build for WebGL
+      # NOTE: To run this for free, you need to add your activated Unity Personal License (.ulf) 
+      # content as a GitHub secret named `UNITY_LICENSE`. 
+      # See: https://game.ci/docs/github/activation for free step-by-step activation!
+      - name: Build WebGL
+        uses: game-ci/unity-builder@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        with:
+          targetPlatform: WebGL
+          buildMethod: BuildScript.BuildWebGL
+
+      # 2. Deploy WebGL to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: Builds/WebGL
+          branch: gh-pages
+
+      # 3. Build for Android
+      - name: Build Android
+        uses: game-ci/unity-builder@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        with:
+          targetPlatform: Android
+          buildMethod: BuildScript.BuildAndroid
+
+      # 4. Upload Android APK artifact
+      - name: Upload Android APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: bomber-run-android-apk
+          path: Builds/Android/bomber-run.apk
