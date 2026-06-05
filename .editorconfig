@@ -1,0 +1,25 @@
+# EditorConfig for C# Unity Project
+root = true
+
+[*.cs]
+# Indentation and spacing
+indent_style = space
+indent_size = 4
+tab_width = 4
+
+# Formatting rules
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Style and quality diagnostics
+dotnet_diagnostic.CA2000.severity = warning      # Dispose objects before losing scope
+dotnet_diagnostic.CA1822.severity = warning      # Mark members as static (performance)
+dotnet_diagnostic.CA1806.severity = warning      # Do not ignore method results
+dotnet_diagnostic.CA1827.severity = warning      # Use Any() instead of Count() > 0 (performance)
+dotnet_diagnostic.CA1828.severity = warning      # Use Any() instead of Count() > 0 on IQueryable
+dotnet_diagnostic.CA3002.severity = warning      # Review code for XSS vulnerabilities
+dotnet_diagnostic.CA3003.severity = warning      # Review code for File Path Injection
+dotnet_diagnostic.CA5350.severity = warning      # Do Not Use Weak Cryptographic Algorithms
+dotnet_diagnostic.CA5351.severity = warning      # Do Not Use Broken Cryptographic Algorithms
+dotnet_diagnostic.CA5364.severity = warning      # Do Not Use Deprecated Security Protocols
