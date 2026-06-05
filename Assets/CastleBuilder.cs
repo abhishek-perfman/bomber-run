@@ -38,20 +38,20 @@ public class CastleBuilder : MonoBehaviour
 
         // 2. Build Perimeter Walls connecting the towers
         // North Wall
-        BuildWall(new Vector3(-halfW + (towerSize * brickSpacing / 2f) + brickSpacing, 0, halfD), 
-                  new Vector3(halfW - (towerSize * brickSpacing / 2f) - brickSpacing, 0, halfD), 
+        BuildWall(new Vector3(-halfW + (towerSize * brickSpacing / 2f) + brickSpacing, 0, halfD),
+                  new Vector3(halfW - (towerSize * brickSpacing / 2f) - brickSpacing, 0, halfD),
                   wallHeight, true);
         // South Wall
-        BuildWall(new Vector3(-halfW + (towerSize * brickSpacing / 2f) + brickSpacing, 0, -halfD), 
-                  new Vector3(halfW - (towerSize * brickSpacing / 2f) - brickSpacing, 0, -halfD), 
+        BuildWall(new Vector3(-halfW + (towerSize * brickSpacing / 2f) + brickSpacing, 0, -halfD),
+                  new Vector3(halfW - (towerSize * brickSpacing / 2f) - brickSpacing, 0, -halfD),
                   wallHeight, true);
         // East Wall
-        BuildWall(new Vector3(halfW, 0, -halfD + (towerSize * brickSpacing / 2f) + brickSpacing), 
-                  new Vector3(halfW, 0, halfD - (towerSize * brickSpacing / 2f) - brickSpacing), 
+        BuildWall(new Vector3(halfW, 0, -halfD + (towerSize * brickSpacing / 2f) + brickSpacing),
+                  new Vector3(halfW, 0, halfD - (towerSize * brickSpacing / 2f) - brickSpacing),
                   wallHeight, false);
         // West Wall
-        BuildWall(new Vector3(-halfW, 0, -halfD + (towerSize * brickSpacing / 2f) + brickSpacing), 
-                  new Vector3(-halfW, 0, halfD - (towerSize * brickSpacing / 2f) - brickSpacing), 
+        BuildWall(new Vector3(-halfW, 0, -halfD + (towerSize * brickSpacing / 2f) + brickSpacing),
+                  new Vector3(-halfW, 0, halfD - (towerSize * brickSpacing / 2f) - brickSpacing),
                   wallHeight, false);
 
         // 3. Build a Central Fortress / Castle Keep in the middle! (5x5 base)
@@ -81,7 +81,7 @@ public class CastleBuilder : MonoBehaviour
         // 3. Spawn a Stone Bridge over the River at Z = 0
         GameObject bridgeGroup = new GameObject("StoneBridge");
         bridgeGroup.transform.position = new Vector3(-22f, 0f, 0f);
-        
+
         Material stoneMat = ShaderHelper.CreateSafeMaterial(new Color(0.4f, 0.42f, 0.45f), 0.1f);
 
         // Bridge Roadway

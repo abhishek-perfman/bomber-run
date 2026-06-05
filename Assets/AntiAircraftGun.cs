@@ -128,10 +128,10 @@ public class AntiAircraftGun : MonoBehaviour
 
         // Spawn position: tip of the barrel
         Vector3 firePort = turretHead.transform.position + turretHead.transform.forward * 1.3f;
-        
+
         GameObject shellObj = new GameObject("AA_Shell");
         shellObj.transform.position = firePort;
-        
+
         AAShell shell = shellObj.AddComponent<AAShell>();
         shell.SetSpecificTarget(target, turretHead.transform.forward);
     }

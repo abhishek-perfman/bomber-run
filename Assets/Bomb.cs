@@ -55,7 +55,7 @@ public class Bomb : MonoBehaviour
         GameObject fireball = GameObject.CreatePrimitive(PrimitiveType.Sphere);
         fireball.transform.position = pos;
         fireball.transform.localScale = Vector3.one * 0.5f;
-        
+
         // Remove collider so it doesn't interfere with physics
         Destroy(fireball.GetComponent<Collider>());
 
@@ -65,7 +65,7 @@ public class Bomb : MonoBehaviour
         {
             rend.material = new Material(Shader.Find("Standard"));
             rend.material.color = new Color(1f, 0.4f, 0f, 0.8f); // Bright Orange-Yellow
-            
+
             // Set rendering mode to Transparent
             rend.material.SetFloat("_Mode", 3f);
             rend.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);

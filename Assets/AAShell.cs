@@ -83,7 +83,7 @@ public class AAShell : MonoBehaviour
         transform.Translate(moveDir * speed * Time.deltaTime, Space.World);
 
         // 3. Collision Checks via distance (highly reliable, bypasses physics collision layers)
-        
+
         // A. Flare decoy check
         if (DecoyFlare.activeFlares.Count > 0)
         {

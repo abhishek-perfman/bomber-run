@@ -271,7 +271,7 @@ public class Cannon : MonoBehaviour
         // Calculate direction pointing directly back to the castle in the center
         Vector3 dirToCastle = (Vector3.zero - transform.position);
         dirToCastle.y = 0f;
-        
+
         // If we are already near the center, just face exactly backwards
         if (dirToCastle.sqrMagnitude < 2f)
         {
@@ -342,7 +342,7 @@ public class Cannon : MonoBehaviour
         {
             // Inherit the plane's forward velocity and apply a tiny downward push (using velocity for compatibility)
             bombRb.linearVelocity = forwardDir * flySpeed + Vector3.down * 1.5f;
-            
+
             // Attach/Configure the Bomb script to cause physical explosions!
             Bomb bombComp = bomb.GetComponent<Bomb>();
             if (bombComp == null)
@@ -580,7 +580,7 @@ public class Cannon : MonoBehaviour
         // Score / Destruction level
         string statsStr = string.Format("Compound Demolished: {0:F1}%", percentage);
         GUI.Label(new Rect(27, 62, 340, 30), statsStr, shadowStyle);
-        
+
         GUIStyle percentStyle = new GUIStyle(textStyle);
         percentStyle.normal.textColor = percentage >= 80f ? Color.green : (percentage >= 40f ? Color.yellow : new Color(0.2f, 0.85f, 1f));
         GUI.Label(new Rect(25, 60, 340, 30), statsStr, percentStyle);
@@ -700,7 +700,7 @@ public class Cannon : MonoBehaviour
             failSubStyle.alignment = TextAnchor.MiddleCenter;
 
             GUI.Box(new Rect(screenW / 2f - 240, screenH / 2f - 95, 480, 190), "", boxStyle);
-            
+
             string failText = isDowned ? "PLANE SHOT DOWN!" : "OUT OF AMMO! FAILED";
             GUI.Label(new Rect(screenW / 2f - 238, screenH / 2f - 78, 480, 80), failText, failTitleShadow);
             GUI.Label(new Rect(screenW / 2f - 240, screenH / 2f - 80, 480, 80), failText, failTitleStyle);
@@ -730,7 +730,7 @@ public class Cannon : MonoBehaviour
 
         bool threatDetected = false;
         AntiAircraftGun[] guns = FindObjectsOfType<AntiAircraftGun>();
-        
+
         foreach (AntiAircraftGun gun in guns)
         {
             if (gun != null && gun.IsAboutToFireAt(this.transform, 1.5f))
@@ -788,7 +788,7 @@ public class Cannon : MonoBehaviour
             float pitchDrop = Mathf.Lerp(250f, 80f, t / duration);
             float sine = Mathf.Sin(2f * Mathf.PI * pitchDrop * t);
             float noise = (Random.value * 2f - 1f) * 0.15f;
-            
+
             samples[i] = (sine + noise) * 0.4f * (1f - (t / duration)); // Linear decay
         }
 
@@ -812,7 +812,7 @@ public static class ShaderHelper
     {
         Shader shader = FindSafeShader();
         Material mat = (shader != null) ? new Material(shader) : new Material(Shader.Find("Hidden/InternalErrorShader"));
-        
+
         if (mat.HasProperty("_BaseColor"))
         {
             mat.SetColor("_BaseColor", color);
